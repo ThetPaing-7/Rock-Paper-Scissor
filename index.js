@@ -1,3 +1,24 @@
+let rockBtn = document.getElementById("rockBtn");
+let paperBtn = document.querySelector("#paperBtn");
+let scissorBtn = document.querySelector("#scissorBtn");
+
+const displayResult = document.querySelector("#holder");
+
+const result = document.createElement("p");
+const tagline = document.createElement("p");
+const humanPoint = document.createElement("p");
+const computerPoint = document.createElement("p");
+
+
+displayResult.appendChild(result);
+displayResult.appendChild(tagline);
+displayResult.appendChild(computerPoint);
+displayResult.appendChild(humanPoint);
+  
+
+
+
+
 //Create 3 variables store 
 let x = "Rock";
 let y = "Paper";
@@ -6,65 +27,96 @@ let z = "Scissors"
 
 let humanScore = 0, computerScore = 0;
 
-playGame(computerScore, humanScore);
 
 
 
-//To play five round
-//if both computerScore and humanScore < 5 
-// Play again until each score reach 5
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice();
-        playRound(humanSelection, computerSelection);
-    }
+const computerSelection = getComputerChoice();
 
-    console.log("Computer Score: " + computerScore);
-    console.log("Human Score: " + humanScore);
-}
+
+
 
 
 //To play a single round
 
 function playRound(humanSelection,computerSelection){
     if(computerSelection === humanSelection){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("Opp!It is is tile")
+        result.textContent = `Computer Selection: ${computerSelection}`; 
+        tagline.textContent = " Opp!It is a tile"
+        
     }
     else if(computerSelection === "rock" && humanSelection === "scissor" ){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("Yon lose! Rock beat scissor")
+        result.textContent = `Computer Selection: ${computerSelection}` ;
+        tagline.textContent = " Yon lose! Rock beat scissor";
         computerScore += 1;
     }
     else if(computerSelection === "rock" && humanSelection === "paper"){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("You win! Paper beat rock")
-        computerScore += 1;
+        result.textContent = `Computer Selection: ${computerSelection}`;
+        tagline.textContent = " You win! Paper beat rock";
+        humanScore += 1;
     }
     else if(computerSelection === "scissor" && humanSelection === "paper"){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("You lose! Scissor beat paper")
+        result.textContent = `Computer Selection: ${computerSelection}` ;
+        tagline.textContent = " You lose! Scissor beat paper";
         computerScore += 1;
     }
     else if(computerSelection === "scissor" && humanSelection === "rock"){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("You Win! Rock beat scissor ")
+        result.textContent = `Computer Selection: ${computerSelection}` ;
+        tagline.setContent = "You Win! Rock beat scissor";
         humanScore += 1;
     }
     else if(computerSelection === "paper" && humanSelection === "rock"){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("You lose! Paper beat rock")
+        result.textContent = `Computer Selection: ${computerSelection} ` ;
+        tagline.textContent = "You lose! Paper beat rock`";
         computerScore += 1;
     }
     else if(computerSelection === "paper" && humanSelection === "scissor"){
-        console.log("Computer Selection: " + computerSelection);
-        console.log("You win! Paper beat Scissor")
+        result.textContent = `Computer Selection: ${computerSelection}` ;
+        tagline.textContent = "You win! Paper beat Scissor";
+        humanScore += 1;
     }else{
-
+        console.log("hi");
     }
+
+    computerPoint.textContent = `Computer Score : ${computerScore}`;
+    humanPoint.textContent = `Human Score : ${humanScore}`;
+    if(humanScore === 5 || computerScore === 5){
+        if(humanScore > computerScore){
+            const winner = document.createElement("strong");
+            winner.textContent ="Yay! You WIN";
+            displayResult.appendChild(winner);
+        }else{
+            const winner = document.createElement("strong");
+            winner.textContent ="Loser! Computer Beat You";
+            displayResult.appendChild(winner);
+        }
+    
+    }
+
+
     
 }
+
+
+
+rockBtn.addEventListener("click",() =>{
+    
+        playRound("rock",computerSelection);
+        
+});
+
+paperBtn.addEventListener("click",() =>{
+        playRound("paper",computerSelection);   
+});
+
+scissorBtn.addEventListener("click",() =>{
+   
+        playRound("scissor",computerSelection);
+       
+    
+});
+
+
+
 
 
  
@@ -83,6 +135,7 @@ function getHumanChoice(){
     return HumanChoice;
 
 }
+
 
 
 
